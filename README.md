@@ -1,0 +1,2 @@
+# BashSoft
+Command execution project
