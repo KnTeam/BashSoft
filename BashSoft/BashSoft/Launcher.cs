@@ -2,9 +2,15 @@
 {
     using System;
 
+    /// <summary>
+    /// Entry point for the project
+    /// </summary>
     public static class Launcher
     {
-        static void Main()
+        /// <summary>
+        /// Program entry point
+        /// </summary>
+        public static void Main()
         {
             Console.ReadKey();
         }
