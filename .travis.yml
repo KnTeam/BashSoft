@@ -1,0 +1,6 @@
+language: csharp
+mono: none
+solution: ./BashSoft/BashSoft.sln
+dotnet: 2.1.4
+script:
+ - dotnet restore
