@@ -12,6 +12,7 @@
         /// </summary>
         public static void Main()
         {
+            IOManager.TraverseDirectory(@"D:\_Cloud\GitHub\BashSoft\BashSoft\BashSoft");
             Console.ReadKey();
         }
     }
