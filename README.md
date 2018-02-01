@@ -12,4 +12,4 @@ Command execution project
 
 ## License
 
-[MIT](https://github.com/KnTeam/BashSoft/blob/development/LICENSE)
+The code in this project is licensed under [MIT](https://github.com/KnTeam/BashSoft/blob/development/LICENSE) license.
