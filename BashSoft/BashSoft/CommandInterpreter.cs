@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using SimpleJudge;
 
     /// <summary>
     /// Class respossible for interpreting user commands
@@ -149,14 +150,12 @@
             {
                 string firstFilePath = data[1];
                 string secondFilePath = data[2];
-
-                // Tester.CompareContent(firstFilePath, secondFilePath);
+                Tester.CompareContent(firstFilePath, secondFilePath);
             }
             else
             {
                 DisplayInvalidCommandMessage(input);
             }
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -205,8 +204,7 @@
             if (data.Length == 2)
             {
                 string fileName = data[1];
-                //StudentsRepository.InitializeData(fileName);
-                throw new NotImplementedException();
+                StudentsRepository.InitializeData(fileName);
             }
             else
             {

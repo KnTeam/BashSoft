@@ -56,7 +56,7 @@
             OutputWriter.WriteMessageOnNewLine("Comparing files...");
 
             int minOutputLines = actualOutputLines.Length;
-            if(actualOutputLines.Length != expectedOutputLines.Length)
+            if (actualOutputLines.Length != expectedOutputLines.Length)
             {
                 hasMismatch = true;
                 minOutputLines = Math.Min(actualOutputLines.Length, expectedOutputLines.Length);
@@ -68,7 +68,7 @@
                 string actualLine = actualOutputLines[index];
                 string expectedLine = expectedOutputLines[index];
 
-                if(!actualLine.Equals(expectedLine))
+                if (!actualLine.Equals(expectedLine))
                 {
                     output = string.Format($"Mismatch at line {index} -- expected: \"{expectedLine}\", actual: \"{actualLine}\"");
                     output += Environment.NewLine;
