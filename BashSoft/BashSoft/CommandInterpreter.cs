@@ -44,6 +44,9 @@
                 case "help":
                     TryGetHelp(input, data);
                     break;
+                case "show":
+                    TryShowWantedData(input, data);
+                    break;
                 case "filter":
                     // TODO: implement after functionality is implemented
                     break;
@@ -235,6 +238,25 @@
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "get help – help"));
                 OutputWriter.WriteMessageOnNewLine($"{new string('_', 100)}");
                 OutputWriter.WriteEmptyLine();
+            }
+            else
+            {
+                DisplayInvalidCommandMessage(input);
+            }
+        }
+
+        private static void TryShowWantedData(string input, string[] data)
+        {
+            if (data.Length == 2)
+            {
+                string courseName = data[1];
+                StudentsRepository.GetAllStudentsFromCourse(courseName);
+            }
+            else if (data.Length == 3)
+            {
+                string courseName = data[1];
+                string userName = data[2];
+                StudentsRepository.GetStudentScoresFromCourse(courseName, userName);
             }
             else
             {
