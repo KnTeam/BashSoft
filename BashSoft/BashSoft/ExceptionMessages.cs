@@ -29,5 +29,17 @@
         /// Invalid number message.
         /// </summary>
         public static string UnableToParseNumber = @"The sequence you've written is not a valid number.";
+
+        //Data is already Initialized Exception
+        public static string DataAlreadyInitializedException = "Data is already initialized!";
+
+        //Data is not Initialized Exception
+        public static string DataNotInitializedExceptionMessage = "The data structure must be initialized first in order to make any operations with it.";
+
+        //The course is not existing
+        public static string InexistingCourseInDataBase = "The course you are trying to get does not exist in the data base!";
+
+        //Comparison between files with different size
+        public static string ComparisonOfFilesWithDifferentSizes = "Files not of equal size, certain mismatch.";
     }
 }

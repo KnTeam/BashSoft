@@ -12,7 +12,6 @@
         /// </summary>
         public static void Main()
         {
-            InputReader.StartReadingCommands();
-        }
+            InputReader.StartReadingCommands();        }
     }
 }
