@@ -12,10 +12,13 @@
         /// </summary>
         public static void Main()
         {
-            IOManager.CreateDirectoryInCurrentFolder("gosho");
-            IOManager.TraverseDirectory(0);
-            Console.WriteLine("Press any key to be happy!");
-            Console.ReadKey();
+            //StudentsRepository.InitializeData();
+            //StudentsRepository.GetStudentScoresFromCourse("Unity", "Ivan");
+            //StudentsRepository.GetAllStudentsFromCourse("Unity");
+            //IOManager.CreateDirectoryInCurrentFolder("gosho");
+            //IOManager.TraverseDirectory(0);
+            //Console.WriteLine("Press any key to be happy!");
+            //Console.ReadKey();
         }
     }
 }

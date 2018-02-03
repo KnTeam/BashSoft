@@ -12,5 +12,14 @@
 
         // TODO: Change the message to something more useful
         public const string ExceptionMessage = "The shit hit the fan!";
+
+        //Data is already Initialized Exception
+        public static string DataAlreadyInitializedException = "Data is already initialized!";
+
+        //Data is not Initialized Exception
+        public static string DataNotInitializedExceptionMessage = "The data structure must be initialized first in order to make any operations with it.";
+
+        //The course is not existing
+        public static string InexistingCourseInDataBase = "The course you are trying to get does not exist in the data base!";
     }
 }

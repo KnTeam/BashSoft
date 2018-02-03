@@ -1,6 +1,7 @@
 ﻿namespace BashSoft
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     ///     Class that give us base functionality for communication with a user.
@@ -15,7 +16,7 @@
         {
             Console.Write(message);
         }
-
+        
         /// <summary>
         ///     Method for writing a message on a new line.
         /// </summary>
@@ -43,6 +44,11 @@
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ForegroundColor = currentColor;
+        }
+
+        public static void PrintStudent(KeyValuePair<string, List<int>> student)
+        {
+            OutputWriter.WriteMessageOnNewLine(string.Format($"{student.Key} - {string.Join(", ", student.Value)}"));
         }
     }
 }
