@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
@@ -31,28 +32,37 @@ namespace BashSoft
             string path = $"{SessionData.currentPath}\\{fileName}";
             if (File.Exists(path))
             {
+                string pattern = @"(?<Course>[A-Z][a-z#+A-Z]*_[A-Z][a-z]{2}_[0-9]{4})\s+(?<Student>[A-Z][a-z]{0,3}\d{2}_\d{2,4})\s+(?<Mark>\d+)";
+
+                Regex rgx = new Regex(pattern);
+
                 string[] allInputLines = File.ReadAllLines(path);
 
                 for (int line = 0; line < allInputLines.Length; line++)
                 {
-                    if (!string.IsNullOrWhiteSpace(allInputLines[line]))
+                    if (!string.IsNullOrWhiteSpace(allInputLines[line]) && rgx.IsMatch(allInputLines[line]))
                     {
-                        string[] tokens = allInputLines[line].Split(' ');
-                        string course = tokens[0];
-                        string student = tokens[1];
-                        int mark = int.Parse(tokens[2]);
+                        Match currentMatch = rgx.Match(allInputLines[line]);
 
-                        if (!studentsByCourse.ContainsKey(course))
+                        string courseName = currentMatch.Groups["Course"].Value;
+                        string userName = currentMatch.Groups["Student"].Value;
+                        int studentScoreOnTask;
+                        bool hasParsedScore = int.TryParse(currentMatch.Groups["Mark"].Value, out studentScoreOnTask);
+
+                        if(hasParsedScore && studentScoreOnTask >= 0 && studentScoreOnTask <= 100)
                         {
-                            studentsByCourse[course] = new Dictionary<string, List<int>>();
+                            if (!studentsByCourse.ContainsKey(courseName))
+                            {
+                                studentsByCourse[courseName] = new Dictionary<string, List<int>>();
+                            }
+
+                            if (!studentsByCourse[courseName].ContainsKey(userName))
+                            {
+                                studentsByCourse[courseName][userName] = new List<int>();
+                            }
                         }
 
-                        if (!studentsByCourse[course].ContainsKey(student))
-                        {
-                            studentsByCourse[course][student] = new List<int>();
-                        }
-
-                        studentsByCourse[course][student].Add(mark);
+                        studentsByCourse[courseName][userName].Add(studentScoreOnTask);
                     }
                 }
 
