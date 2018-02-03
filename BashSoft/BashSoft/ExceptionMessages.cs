@@ -21,5 +21,8 @@
 
         //The course is not existing
         public static string InexistingCourseInDataBase = "The course you are trying to get does not exist in the data base!";
+
+        //Comparison between files with different size
+        public static string ComparisonOfFilesWithDifferentSizes = "Files not of equal size, certain mismatch.";
     }
 }

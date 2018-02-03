@@ -6,7 +6,7 @@ namespace SimpleJudge
     {
         public static void Main(string[] args)
         {
-            Tester.CompareContent(@"D:\Git\BashSoft\UserOutput\test2.txt", @"D:\Git\BashSoft\UserOutput/test3.txt");
+            Tester.CompareContent(@"D:\Git\BashSoft\UserOutput\actual.txt", @"D:\Git\BashSoft\UserOutput\expected.txt");
         }
     }
 }
