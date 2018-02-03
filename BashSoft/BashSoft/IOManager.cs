@@ -1,4 +1,6 @@
-﻿namespace BashSoft
+﻿using System;
+
+namespace BashSoft
 {
     using System.Collections.Generic;
     using System.IO;
@@ -34,18 +36,25 @@
                 // Print the folder path
                 OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', identation), currentPath));
 
-                foreach (string file in Directory.GetFiles(currentPath))
+                try
                 {
-                    // get file name and replace the full path with dashes
-                    int indexOfLastSlash = file.LastIndexOf("\\");
-                    string fileName = file.Substring(indexOfLastSlash);
-                    OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', indexOfLastSlash), fileName));
-                }
+                    foreach (string file in Directory.GetFiles(currentPath))
+                    {
+                        // get file name and replace the full path with dashes
+                        int indexOfLastSlash = file.LastIndexOf("\\");
+                        string fileName = file.Substring(indexOfLastSlash);
+                        OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', indexOfLastSlash), fileName));
+                    }
 
-                // Add all it's subfolders to the end of the queue
-                foreach (string directoryPath in Directory.GetDirectories(currentPath))
+                    // Add all it's subfolders to the end of the queue
+                    foreach (string directoryPath in Directory.GetDirectories(currentPath))
+                    {
+                        subFoldersQueue.Enqueue(directoryPath);
+                    }
+                }
+                catch (UnauthorizedAccessException)
                 {
-                    subFoldersQueue.Enqueue(directoryPath);
+                    OutputWriter.DisplayException(ExceptionMessages.UnauthorizedAccessExceptionMessage);
                 }
             }
         }
@@ -58,17 +67,35 @@
         {
             // TODO: GetCurrentDirectoryPath()
             string path = Directory.GetCurrentDirectory() + "\\" + name;
-            Directory.CreateDirectory(path);
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (ArgumentException)
+            {
+                OutputWriter.DisplayException(ExceptionMessages.ForbiddenSymbolsContainedInName);
+            }
         }
 
+        /// <summary>
+        /// Moves forwards and backwards in the folders 
+        /// </summary>
+        /// <param name="relativePath">New relative path</param>
         public static void ChangeCurrentDirectoryRelative(string relativePath)
         {
             if (relativePath == "..")
             {
-                string currentPath = SessionData.currentPath;
-                int indexOfLastSlash = currentPath.LastIndexOf("\\");
-                string newPath = currentPath.Substring(0, indexOfLastSlash);
-                SessionData.currentPath = newPath;
+                try
+                {
+                    string currentPath = SessionData.currentPath;
+                    int indexOfLastSlash = currentPath.LastIndexOf("\\");
+                    string newPath = currentPath.Substring(0, indexOfLastSlash);
+                    SessionData.currentPath = newPath;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    OutputWriter.DisplayException(ExceptionMessages.UnableToGoHigherInPartitionHierarchy);
+                }
             }
             else
             {
@@ -78,7 +105,11 @@
             }
         }
 
-        private static void ChangeCurrentDirectoryAbsolute(string absolutePath)
+        /// <summary>
+        /// Gets an absolute path and goes directly there
+        /// </summary>
+        /// <param name="absolutePath">Absolute path to go to</param>
+        public static void ChangeCurrentDirectoryAbsolute(string absolutePath)
         {
             if (!Directory.Exists(absolutePath))
             {
