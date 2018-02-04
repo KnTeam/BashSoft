@@ -30,16 +30,29 @@
         /// </summary>
         public static string UnableToParseNumber = @"The sequence you've written is not a valid number.";
 
-        //Data is already Initialized Exception
+        /// <summary>
+        /// Data is already Initialized Exception
+        /// </summary>
         public static string DataAlreadyInitializedException = "Data is already initialized!";
 
-        //Data is not Initialized Exception
+        /// <summary>
+        /// Data is not Initialized Exception
+        /// </summary>
         public static string DataNotInitializedExceptionMessage = "The data structure must be initialized first in order to make any operations with it.";
 
-        //The course is not existing
+        /// <summary>
+        /// The course is not existing
+        /// </summary>
         public static string InexistingCourseInDataBase = "The course you are trying to get does not exist in the data base!";
 
-        //Comparison between files with different size
+        /// <summary>
+        /// Comparison between files with different size
+        /// </summary>
         public static string ComparisonOfFilesWithDifferentSizes = "Files not of equal size, certain mismatch.";
+
+        /// <summary>
+        /// Given word does not match any of the categories
+        /// </summary>
+        public static string InvalidStudentFilter = "The given filter is not one of the following: excellent/average/poor";
     }
 }

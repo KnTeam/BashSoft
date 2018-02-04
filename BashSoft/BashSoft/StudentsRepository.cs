@@ -49,7 +49,7 @@ namespace BashSoft
                         int studentScoreOnTask;
                         bool hasParsedScore = int.TryParse(currentMatch.Groups["Mark"].Value, out studentScoreOnTask);
 
-                        if(hasParsedScore && studentScoreOnTask >= 0 && studentScoreOnTask <= 100)
+                        if (hasParsedScore && studentScoreOnTask >= 0 && studentScoreOnTask <= 100)
                         {
                             if (!studentsByCourse.ContainsKey(courseName))
                             {
@@ -127,6 +127,40 @@ namespace BashSoft
                 {
                     OutputWriter.PrintStudent(studentMarkEntry);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Bediator between the command interpreter and the filters/sorters. 
+        /// </summary>
+        /// <param name="courseName">Course name</param>
+        /// <param name="givenFilter">Filter: excellent/average/poor</param>
+        /// <param name="studentsToTake">Number of students to take (nullable)</param>
+        public static void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
+        {
+            if (IsQueryForCoursePossible(courseName))
+            {
+                if (studentsToTake == null)
+                {
+                    studentsToTake = studentsByCourse[courseName].Count;
+                }
+
+                RepositoryFilters.FilterAndTake(studentsByCourse[courseName], givenFilter, studentsToTake.Value);
+            }
+        }
+
+        public static void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
+        {
+            if (IsQueryForCoursePossible(courseName))
+            {
+                if (studentsToTake == null)
+                {
+                    studentsToTake = studentsByCourse[courseName].Count;
+                }
+
+                throw new NotImplementedException("Uncomment this when RepositorySorters.OrderAndTake is implemented");
+                // TODO: Uncomment this when RepositorySorters.OrderAndTake is implemented
+                // RepositorySorters.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
             }
         }
     }
