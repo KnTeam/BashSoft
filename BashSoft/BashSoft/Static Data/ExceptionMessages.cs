@@ -54,5 +54,11 @@
         /// Given word does not match any of the categories
         /// </summary>
         public static string InvalidStudentFilter = "The given filter is not one of the following: excellent/average/poor";
+
+        public static string InvalidComparisonQuery = "The comparison query you want, does not exist in the context of the current program!";
+
+        public static string InvalidTakeQuantityParameter = "The take command expected does not match the format wanted!";
+
+        public static string InvalidTakeCommand = "The command is not a valid take command!";
     }
 }

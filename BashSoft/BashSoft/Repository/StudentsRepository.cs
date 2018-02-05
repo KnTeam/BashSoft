@@ -157,10 +157,9 @@ namespace BashSoft
                 {
                     studentsToTake = studentsByCourse[courseName].Count;
                 }
+                RepositorySorters.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
 
-                throw new NotImplementedException("Uncomment this when RepositorySorters.OrderAndTake is implemented");
-                // TODO: Uncomment this when RepositorySorters.OrderAndTake is implemented
-                // RepositorySorters.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
+
             }
         }
     }
