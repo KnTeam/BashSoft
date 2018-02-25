@@ -5,6 +5,8 @@ namespace BashSoft
     using System;
     using System.Diagnostics;
     using SimpleJudge;
+    using BashSoft.IO.Commands;
+    using BashSoft.Exceptions;
 
     /// <summary>
     /// Class respossible for interpreting user commands
@@ -26,14 +28,14 @@ namespace BashSoft
         /// Interprets given input and executes the coresponding command. If the command or arguments are invalid, an user friendly exception message is given
         /// </summary>
         /// <param name="input">User input string with command and arguments (if any)</param>
-        public void InterpredComman(string input)
+        public void InterpredCommand(string input)
         {
             string[] data = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string command = data[0];
+            string commandName = data[0];
 
             try
             {
-                this.ParseCommand(input, command, data);
+                this.ParseCommand(input, commandName, data);
             }
             catch (DirectoryNotFoundException dNotFound)
             {
@@ -53,9 +55,9 @@ namespace BashSoft
             }
         }
 
-        private void ParseCommand(string input, string command, string[] data)
+        private Command ParseCommand(string input, string commandName, string[] data)
         {
-            switch (command.ToLower())
+            switch (commandName.ToLower())
             {
                 case "open":
                     TryOpenFile(input, data);
@@ -103,8 +105,7 @@ namespace BashSoft
                     // TODO: implement after functionality is implemented
                     break;
                 default:
-                    DisplayInvalidCommandMessage(input);
-                    break;
+                    throw new InvalidCommandException(commandName);
             }
         }
 

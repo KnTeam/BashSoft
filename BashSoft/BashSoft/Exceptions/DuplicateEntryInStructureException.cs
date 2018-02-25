@@ -5,11 +5,6 @@ namespace BashSoft.Exceptions
 {
     public class DuplicateEntryInStructureException : Exception
     {
-        public DuplicateEntryInStructureException()
-            : base(ExceptionMessages.DuplicateEntry)
-        {
-        }
-
         public DuplicateEntryInStructureException(string message)
             : base(message)
         {

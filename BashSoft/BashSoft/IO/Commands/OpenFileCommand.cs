@@ -1,6 +1,8 @@
-﻿using SimpleJudge;
+﻿using BashSoft.Exceptions;
+using SimpleJudge;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace BashSoft.IO.Commands
@@ -14,7 +16,13 @@ namespace BashSoft.IO.Commands
 
         public override void Execute()
         {
-            throw new NotImplementedException();
+            if (this.Data.Length != 2)
+            {
+                throw new InvalidCommandException(this.Input);
+            }
+            string fileName = this.Data[1];
+
+            Process.Start(SessionData.currentPath + "\\" + fileName);
         }
     }
 }

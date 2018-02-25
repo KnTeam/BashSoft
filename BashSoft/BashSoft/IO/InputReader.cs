@@ -27,7 +27,7 @@
             // TODO: change with do-while ??? avoiding repetitions of code
             while (!input.Equals(endCommand))
             {
-                this.interpreter.InterpredComman(input);
+                this.interpreter.InterpredCommand(input);
                 OutputWriter.WriteMessage($"{SessionData.currentPath}> ");
                 input = Console.ReadLine();
                 input = input.Trim();

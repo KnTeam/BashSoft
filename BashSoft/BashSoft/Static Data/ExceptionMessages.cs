@@ -97,5 +97,7 @@
         /// A null or empty value given exception
         /// </summary>
         public static string NullOrEmptyValue = "The value of the variable CANNOT be null or empty!";
+
+        public static string DisplayInvalidCommandMessage = "The command {0} is invalid";
     }
 }
