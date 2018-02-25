@@ -56,6 +56,9 @@
         public static string InvalidStudentFilter = "The given filter is not one of the following: excellent/average/poor";
 
         /// <summary>
+        /// Comparison query is not valid
+        /// </summary>
+        /// <summary>
         /// Given score is not between 0 and 100
         /// </summary>
         public static string InvalidScore = "The number for the score you've entered is not in the range of 0 - 100";
@@ -76,8 +79,20 @@
         public static string InvalidTakeCommand = "The command is not a valid take command!";
 
         /// <summary>
-        /// The given score Number is more than the tasks on the exam
+        /// Current student is in a certain course. 
         /// </summary>
-        public static string InvalidNumberOfScores = "The number of scores is more than the tasks on the exam!";
+        public static string StudentAlreadyEnrolledInGivenCourse = "The {0} already exists in {1}.";
+
+        /// <summary>
+        /// Current student is not in this course
+        /// </summary>
+        public static string NotEnrolledInCourse = "Student must be enrolled in a course before you set his mark.";
+
+        /// <summary>
+        /// The number of scores for the given course is greater than the possible.
+        /// </summary>
+        public static string InvalidNumberOfScores = "The number of scores for the given course is greater than the possible.";
+
+
     }
 }
