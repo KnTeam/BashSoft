@@ -21,7 +21,7 @@ namespace BashSoft.IO.Commands
             this.Data = data;
             this.judge = judge;
             this.repository = repository;
-            this.inputOutputManager = InputOutputManager;
+            this.inputOutputManager = inputOutputManager;
         }
 
         protected Tester Judge
