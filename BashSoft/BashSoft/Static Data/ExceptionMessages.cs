@@ -55,10 +55,29 @@
         /// </summary>
         public static string InvalidStudentFilter = "The given filter is not one of the following: excellent/average/poor";
 
+        /// <summary>
+        /// Given score is not between 0 and 100
+        /// </summary>
+        public static string InvalidScore = "The number for the score you've entered is not in the range of 0 - 100";
+
+        /// <summary>
+        /// Given comparison is not valid
+        /// </summary>
         public static string InvalidComparisonQuery = "The comparison query you want, does not exist in the context of the current program!";
 
+        /// <summary>
+        /// Given quantity is not in the proper format
+        /// </summary>
         public static string InvalidTakeQuantityParameter = "The take command expected does not match the format wanted!";
 
+        /// <summary>
+        /// The given "Take" command is not valid
+        /// </summary>
         public static string InvalidTakeCommand = "The command is not a valid take command!";
+
+        /// <summary>
+        /// The given score Number is more than the tasks on the exam
+        /// </summary>
+        public static string InvalidNumberOfScores = "The number of scores is more than the tasks on the exam!";
     }
 }
