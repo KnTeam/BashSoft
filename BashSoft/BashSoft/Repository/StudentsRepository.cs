@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BashSoft.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -107,23 +108,6 @@ namespace BashSoft
                         {
                             OutputWriter.DisplayException(fex.Message + $"at line : {line}");
                         }
-                        //int studentScoreOnTask;
-                        //bool hasParsedScore = int.TryParse(currentMatch.Groups["Mark"].Value, out studentScoreOnTask);
-                        
-                        //if (hasParsedScore && studentScoreOnTask >= 0 && studentScoreOnTask <= 100)
-                        //{
-                        //    if (!studentsByCourse.ContainsKey(courseName))
-                        //    {
-                        //        studentsByCourse[courseName] = new Dictionary<string, List<int>>();
-                        //    }
-
-                        //    if (!studentsByCourse[courseName].ContainsKey(userName))
-                        //    {
-                        //        studentsByCourse[courseName][userName] = new List<int>();
-                        //    }
-                        //}
-
-                        studentsByCourse[courseName][userName].Add(studentScoreOnTask);
                     }
                 }
 
@@ -140,7 +124,7 @@ namespace BashSoft
         {
             if (isDataInitialized)
             {
-                if (studentsByCourse.ContainsKey(courseName))
+                if (this.courses.ContainsKey(courseName))
                 {
                     return true;
                 }
@@ -159,7 +143,7 @@ namespace BashSoft
 
         public bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
-            if (IsQueryForCoursePossible(courseName) && studentsByCourse[courseName].ContainsKey(studentUserName))
+            if (this.IsQueryForCoursePossible(courseName) && this.courses[courseName].StudentsByName.ContainsKey(studentUserName))
             {
                 return true;
             }
@@ -174,7 +158,7 @@ namespace BashSoft
         {
             if (IsQueryForStudentPossible(courseName, username))
             {
-                OutputWriter.PrintStudent(new KeyValuePair<string, List<int>>(username, studentsByCourse[courseName][username]));
+                OutputWriter.PrintStudent(new KeyValuePair<string, double>(username, this.courses[courseName].StudentsByName[username].MarksByCourseName[courseName]));
             }
         }
 
@@ -184,9 +168,9 @@ namespace BashSoft
             {
                 OutputWriter.WriteMessageOnNewLine($"{courseName}:");
 
-                foreach (var studentMarkEntry in studentsByCourse[courseName])
+                foreach (var studentMarkEntry in this.courses[courseName].StudentsByName)
                 {
-                    OutputWriter.PrintStudent(studentMarkEntry);
+                    this.GetStudentScoresFromCourse(courseName, studentMarkEntry.Key);
                 }
             }
         }
@@ -203,10 +187,11 @@ namespace BashSoft
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = studentsByCourse[courseName].Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
+                Dictionary<string, double> marks = this.courses[courseName].StudentsByName.ToDictionary(x => x.Key, y => y.Value.MarksByCourseName[courseName]);
 
-                this.filter.FilterAndTake(studentsByCourse[courseName], givenFilter, studentsToTake.Value);
+                this.filter.FilterAndTake(marks, givenFilter, studentsToTake.Value);
             }
         }
 
@@ -216,10 +201,11 @@ namespace BashSoft
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = studentsByCourse[courseName].Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
+                Dictionary<string, double> marks = this.courses[courseName].StudentsByName.ToDictionary(x => x.Key, y => y.Value.MarksByCourseName[courseName]);
                 
-                this.sorter.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
+                this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
         }
     }

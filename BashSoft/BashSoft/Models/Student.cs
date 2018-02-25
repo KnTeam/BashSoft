@@ -54,7 +54,7 @@ namespace BashSoft.Models
         /// Used for setting the current students' average mark in a certain course
         /// </summary>
         /// <param name="course"></param>
-        public void SetMarksInCourse(string courseName, params int[] scores)
+        public void SetMarkOnCourse(string courseName, params int[] scores)
         {
             if (!this.EnrolledCourses.ContainsKey(courseName))
             {
