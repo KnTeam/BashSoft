@@ -48,7 +48,7 @@
 
         public static void PrintStudent(KeyValuePair<string, double> student)
         {
-            OutputWriter.WriteMessageOnNewLine($"{student.Key} - {student.Value}");
+            OutputWriter.WriteMessageOnNewLine($"{student.Key} - {student.Value:F2}");
         }
     }
 }
