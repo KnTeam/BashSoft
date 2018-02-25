@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BashSoft
 {
-    public class RepositorySorters
+    public class RepositorySorter
     {
         public void OrderAndTake(Dictionary<string, List<int>> wantedData, string comparison, int studentsToTake)
         {

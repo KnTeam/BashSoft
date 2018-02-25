@@ -221,7 +221,7 @@
             if (data.Length == 2)
             {
                 string fileName = data[1];
-                this.repository.InitializeData(fileName);
+                this.repository.LoadData(fileName);
             }
             else
             {
@@ -242,7 +242,7 @@
             }
 
             this.repository.UnloadData();
-            OutputWriter.WriteMessageOnNewLine("Database dropped!");
+            OutputWriter.WriteMessageOnNewLine("");
         }
 
         /// <summary>

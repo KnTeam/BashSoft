@@ -11,17 +11,17 @@ namespace BashSoft
         //Dictionary<Course name, Dictionary<Username, Grades>>
         private Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
         private bool isDataInitialized;
-        private RepositoryFilters filter;
-        private RepositorySorters sorter;
+        private RepositoryFilter filter;
+        private RepositorySorter sorter;
 
-        public StudentsRepository(RepositorySorters sorter, RepositoryFilters filter)
+        public StudentsRepository(RepositorySorter sorter, RepositoryFilter filter)
         {
             this.filter = filter;
             this.sorter = sorter;
             this.studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
         }
 
-        private void UnloadData()
+        public void UnloadData()
         {
             if (!this.isDataInitialized)
             {
@@ -31,7 +31,7 @@ namespace BashSoft
             this.isDataInitialized = false;
         }
 
-        private void LoadData(string fileName)
+        public void LoadData(string fileName)
         {
             if (this.isDataInitialized)
             {
@@ -44,7 +44,7 @@ namespace BashSoft
             ReadData(fileName);
         }
 
-        private void ReadData(string fileName)
+        public void ReadData(string fileName)
         {
             string path = $"{SessionData.currentPath}\\{fileName}";
             if (File.Exists(path))
@@ -92,7 +92,7 @@ namespace BashSoft
             }
         }
 
-        private bool IsQueryForCoursePossible(string courseName)
+        public bool IsQueryForCoursePossible(string courseName)
         {
             if (isDataInitialized)
             {
@@ -113,7 +113,7 @@ namespace BashSoft
             return false;
         }
 
-        private bool IsQueryForStudentPossible(string courseName, string studentUserName)
+        public bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
             if (IsQueryForCoursePossible(courseName) && studentsByCourse[courseName].ContainsKey(studentUserName))
             {
@@ -126,7 +126,7 @@ namespace BashSoft
             return false;
         }
 
-        private void GetStudentScoresFromCourse(string courseName, string username)
+        public void GetStudentScoresFromCourse(string courseName, string username)
         {
             if (IsQueryForStudentPossible(courseName, username))
             {
@@ -134,7 +134,7 @@ namespace BashSoft
             }
         }
 
-        private void GetAllStudentsFromCourse(string courseName)
+        public void GetAllStudentsFromCourse(string courseName)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -153,7 +153,7 @@ namespace BashSoft
         /// <param name="courseName">Course name</param>
         /// <param name="givenFilter">Filter: excellent/average/poor</param>
         /// <param name="studentsToTake">Number of students to take (nullable)</param>
-        private void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
+        public void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -162,11 +162,11 @@ namespace BashSoft
                     studentsToTake = studentsByCourse[courseName].Count;
                 }
 
-                RepositoryFilter.FilterAndTake(studentsByCourse[courseName], givenFilter, studentsToTake.Value);
+                this.filter.FilterAndTake(studentsByCourse[courseName], givenFilter, studentsToTake.Value);
             }
         }
 
-        private void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
+        public void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -174,9 +174,8 @@ namespace BashSoft
                 {
                     studentsToTake = studentsByCourse[courseName].Count;
                 }
-                RepositorySorters.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
-
-
+                
+                this.sorter.OrderAndTake(studentsByCourse[courseName], comparison, studentsToTake.Value);
             }
         }
     }
