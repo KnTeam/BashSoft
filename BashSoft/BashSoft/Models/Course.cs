@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BashSoft.Models
 {
@@ -13,21 +14,29 @@ namespace BashSoft.Models
         public Course(string name)
         {
             this.Name = name;
-            this.StudentsByName = new Dictionary<string, Student>();
+            this.studentsByName = new Dictionary<string, Student>();
         }
 
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException(nameof(this.Name), ExceptionMessages.NullOrEmptyValue);
+                }
+
+                _name = value;
+            }
         }
 
-        public Dictionary<string, Student> StudentsByName
-        {
-            get { return studentsByName; }
-            set { studentsByName = value; }
-        }
+        public IReadOnlyDictionary<string, Student> StudentsByName => studentsByName;
 
+        /// <summary>
+        /// Enrolling the current student in a certain course
+        /// </summary>
+        /// <param name="student">Given student</param>
         public void EnrollStudent(Student student)
         {
             if (this.StudentsByName.ContainsKey(student.UserName))
@@ -36,7 +45,7 @@ namespace BashSoft.Models
                 return;
             }
 
-            this.StudentsByName.Add(student.UserName, student);
+            this.studentsByName.Add(student.UserName, student);
         }
     }
 }

@@ -13,27 +13,27 @@ namespace BashSoft.Models
         public Student(string userName)
         {
             this.UserName = userName;
-            this.EnrolledCourses = new Dictionary<string, Course>();
-            this.MarksByCourseName = new Dictionary<string, double>();
+            this.enrolledCourses = new Dictionary<string, Course>();
+            this.marksByCourseName = new Dictionary<string, double>();
         }
 
         public string UserName
         {
             get => userName;
-            set { userName = value; }
+            private set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException(nameof(this.userName), ExceptionMessages.NullOrEmptyValue);
+                }
+
+                userName = value;
+            }
         }
 
-        public Dictionary<string, Course> EnrolledCourses
-        {
-            get => enrolledCourses;
-            set { enrolledCourses = value; }
-        }
+        public IReadOnlyDictionary<string, Course> EnrolledCourses => enrolledCourses;
 
-        public Dictionary<string, double> MarksByCourseName
-        {
-            get => marksByCourseName;
-            set { marksByCourseName = value; }
-        }
+        public IReadOnlyDictionary<string, double> MarksByCourseName => marksByCourseName;
 
         /// <summary>
         /// Used for enrolling the current student in a certain course
@@ -47,14 +47,14 @@ namespace BashSoft.Models
                 return;
             }
 
-            this.EnrolledCourses.Add(course.Name, course);
+            this.enrolledCourses.Add(course.Name, course);
         }
 
         /// <summary>
         /// Used for setting the current students' average mark in a certain course
         /// </summary>
         /// <param name="course"></param>
-        public void SetMarksInCourse(string courseName, params int[] scores)
+        public void SetMarkOnCourse(string courseName, params int[] scores)
         {
             if (!this.EnrolledCourses.ContainsKey(courseName))
             {
@@ -67,7 +67,7 @@ namespace BashSoft.Models
                 OutputWriter.DisplayException(ExceptionMessages.InvalidNumberOfScores);
             }
 
-            this.MarksByCourseName.Add(courseName, CalculateMarks(scores));
+            this.marksByCourseName.Add(courseName, CalculateMarks(scores));
         }
 
         /// <summary>

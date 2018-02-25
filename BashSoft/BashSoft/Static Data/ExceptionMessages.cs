@@ -85,6 +85,9 @@
         /// </summary>
         public static string InvalidNumberOfScores = "The number of scores for the given course is greater than the possible.";
 
-
+        /// <summary>
+        /// A null or empty value given exception
+        /// </summary>
+        public static string NullOrEmptyValue = "The value of the variable CANNOT be null or empty!";
     }
 }
