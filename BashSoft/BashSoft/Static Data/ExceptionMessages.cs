@@ -58,15 +58,23 @@
         /// <summary>
         /// Comparison query is not valid
         /// </summary>
+        /// <summary>
+        /// Given score is not between 0 and 100
+        /// </summary>
+        public static string InvalidScore = "The number for the score you've entered is not in the range of 0 - 100";
+
+        /// <summary>
+        /// Given comparison is not valid
+        /// </summary>
         public static string InvalidComparisonQuery = "The comparison query you want, does not exist in the context of the current program!";
 
         /// <summary>
-        /// The take command format exeption
+        /// Given quantity is not in the proper format
         /// </summary>
         public static string InvalidTakeQuantityParameter = "The take command expected does not match the format wanted!";
 
         /// <summary>
-        /// The command is not a valid take command
+        /// The given "Take" command is not valid
         /// </summary>
         public static string InvalidTakeCommand = "The command is not a valid take command!";
 
