@@ -6,28 +6,45 @@ using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
-    public static class StudentsRepository
+    public class StudentsRepository
     {
-        public static bool isDataInitialized = false;
-
         //Dictionary<Course name, Dictionary<Username, Grades>>
-        private static Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
+        private Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
+        private bool isDataInitialized;
+        private RepositoryFilters filter;
+        private RepositorySorters sorter;
 
-        public static void InitializeData(string fileName)
+        public StudentsRepository(RepositorySorters sorter, RepositoryFilters filter)
         {
-            if (!isDataInitialized)
-            {
-                OutputWriter.WriteMessageOnNewLine("Reading data...");
-                studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
-                ReadData(fileName);
-            }
-            else
-            {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataAlreadyInitializedException);
-            }
+            this.filter = filter;
+            this.sorter = sorter;
+            this.studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
         }
 
-        private static void ReadData(string fileName)
+        private void UnloadData()
+        {
+            if (!this.isDataInitialized)
+            {
+                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataNotInitializedExceptionMessage);
+            }
+            this.studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
+            this.isDataInitialized = false;
+        }
+
+        private void LoadData(string fileName)
+        {
+            if (this.isDataInitialized)
+            {
+                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataAlreadyInitializedException);
+                return;                
+            }
+
+            OutputWriter.WriteMessageOnNewLine("Reading data...");
+            studentsByCourse = new Dictionary<string, Dictionary<string, List<int>>>();
+            ReadData(fileName);
+        }
+
+        private void ReadData(string fileName)
         {
             string path = $"{SessionData.currentPath}\\{fileName}";
             if (File.Exists(path))
@@ -75,7 +92,7 @@ namespace BashSoft
             }
         }
 
-        private static bool IsQueryForCoursePossible(string courseName)
+        private bool IsQueryForCoursePossible(string courseName)
         {
             if (isDataInitialized)
             {
@@ -96,7 +113,7 @@ namespace BashSoft
             return false;
         }
 
-        private static bool IsQueryForStudentPossible(string courseName, string studentUserName)
+        private bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
             if (IsQueryForCoursePossible(courseName) && studentsByCourse[courseName].ContainsKey(studentUserName))
             {
@@ -109,7 +126,7 @@ namespace BashSoft
             return false;
         }
 
-        public static void GetStudentScoresFromCourse(string courseName, string username)
+        private void GetStudentScoresFromCourse(string courseName, string username)
         {
             if (IsQueryForStudentPossible(courseName, username))
             {
@@ -117,7 +134,7 @@ namespace BashSoft
             }
         }
 
-        public static void GetAllStudentsFromCourse(string courseName)
+        private void GetAllStudentsFromCourse(string courseName)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -136,7 +153,7 @@ namespace BashSoft
         /// <param name="courseName">Course name</param>
         /// <param name="givenFilter">Filter: excellent/average/poor</param>
         /// <param name="studentsToTake">Number of students to take (nullable)</param>
-        public static void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
+        private void FilterAndTake(string courseName, string givenFilter, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -149,7 +166,7 @@ namespace BashSoft
             }
         }
 
-        public static void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
+        private void OrderAndTake(string courseName, string comparison, int? studentsToTake = null)
         {
             if (IsQueryForCoursePossible(courseName))
             {
