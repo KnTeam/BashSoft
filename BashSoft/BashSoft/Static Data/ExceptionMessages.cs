@@ -55,10 +55,36 @@
         /// </summary>
         public static string InvalidStudentFilter = "The given filter is not one of the following: excellent/average/poor";
 
+        /// <summary>
+        /// Comparison query is not valid
+        /// </summary>
         public static string InvalidComparisonQuery = "The comparison query you want, does not exist in the context of the current program!";
 
+        /// <summary>
+        /// The take command format exeption
+        /// </summary>
         public static string InvalidTakeQuantityParameter = "The take command expected does not match the format wanted!";
 
+        /// <summary>
+        /// The command is not a valid take command
+        /// </summary>
         public static string InvalidTakeCommand = "The command is not a valid take command!";
+
+        /// <summary>
+        /// Current student is in a certain course. 
+        /// </summary>
+        public static string StudentAlreadyEnrolledInGivenCourse = "The {0} already exists in {1}.";
+
+        /// <summary>
+        /// Current student is not in this course
+        /// </summary>
+        public static string NotEnrolledInCourse = "Student must be enrolled in a course before you set his mark.";
+
+        /// <summary>
+        /// The number of scores for the given course is greater than the possible.
+        /// </summary>
+        public static string InvalidNumberOfScores = "The number of scores for the given course is greater than the possible.";
+
+
     }
 }
