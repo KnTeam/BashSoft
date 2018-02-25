@@ -30,7 +30,7 @@ namespace BashSoft
         {
             if (!this.isDataInitialized)
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataNotInitializedExceptionMessage);
+                throw new InvalidOperationException(ExceptionMessages.DataNotInitializedExceptionMessage);
             }
             this.students = null;
             this.courses = null;
@@ -41,8 +41,7 @@ namespace BashSoft
         {
             if (this.isDataInitialized)
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.DataAlreadyInitializedException);
-                return;                
+                throw new InvalidOperationException(ExceptionMessages.DataAlreadyInitializedException);             
             }
 
             OutputWriter.WriteMessageOnNewLine("Reading data...");

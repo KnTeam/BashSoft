@@ -41,8 +41,7 @@ namespace BashSoft.Models
         {
             if (this.StudentsByName.ContainsKey(student.UserName))
             {
-                OutputWriter.DisplayException(string.Format(ExceptionMessages.StudentAlreadyEnrolledInGivenCourse, student.UserName, this.Name));
-                return;
+                throw new InvalidOperationException(string.Format(ExceptionMessages.StudentAlreadyEnrolledInGivenCourse, student.UserName, this.Name));
             }
 
             this.studentsByName.Add(student.UserName, student);
