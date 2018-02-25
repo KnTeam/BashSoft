@@ -1,0 +1,23 @@
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace BashSoft.Exceptions
+{
+    public class DuplicateEntryInStructureException : Exception
+    {
+        public DuplicateEntryInStructureException()
+            : base(ExceptionMessages.DuplicateEntry)
+        {
+        }
+
+        public DuplicateEntryInStructureException(string message)
+            : base(message)
+        {
+        }
+        public DuplicateEntryInStructureException(string entry, string structure)
+            : base(string.Format(ExceptionMessages.DuplicateEntry, entry, structure))
+        {
+        }
+
+    }
+}

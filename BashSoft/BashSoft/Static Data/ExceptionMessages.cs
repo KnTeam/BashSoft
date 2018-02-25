@@ -81,7 +81,7 @@
         /// <summary>
         /// Current student is in a certain course. 
         /// </summary>
-        public static string StudentAlreadyEnrolledInGivenCourse = "The {0} already exists in {1}.";
+        public static string DuplicateEntry = "The {0} already exists in {1}.";
 
         /// <summary>
         /// Current student is not in this course
