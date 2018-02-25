@@ -8,13 +8,13 @@ namespace BashSoft
     /// <summary>
     ///     Functionality for traversing the folders and other behaviors.
     /// </summary>
-    public static class IOManager
+    public class IOManager
     {
         /// <summary>
         ///     Traverse the folder of the project using a queue with BFS.
         /// </summary>
         /// <param name="path">Folders to traverse</param>
-        public static void TraverseDirectory(int depth)
+        public void TraverseDirectory(int depth)
         {
             OutputWriter.WriteEmptyLine();
             int initialIdentation = SessionData.currentPath.Split('\\').Length;
@@ -63,10 +63,10 @@ namespace BashSoft
         /// Method for making a directory.
         /// </summary>
         /// <param name="name">Name of the folder to create</param>
-        public static void CreateDirectoryInCurrentFolder(string name)
+        public void CreateDirectoryInCurrentFolder(string name)
         {
             // TODO: GetCurrentDirectoryPath()
-            string path = Directory.GetCurrentDirectory() + "\\" + name;
+            string path = SessionData.currentPath + "\\" + name;
             try
             {
                 Directory.CreateDirectory(path);
@@ -81,7 +81,7 @@ namespace BashSoft
         /// Moves forwards and backwards in the folders 
         /// </summary>
         /// <param name="relativePath">New relative path</param>
-        public static void ChangeCurrentDirectoryRelative(string relativePath)
+        public void ChangeCurrentDirectoryRelative(string relativePath)
         {
             if (relativePath == "..")
             {
@@ -109,7 +109,7 @@ namespace BashSoft
         /// Gets an absolute path and goes directly there
         /// </summary>
         /// <param name="absolutePath">Absolute path to go to</param>
-        public static void ChangeCurrentDirectoryAbsolute(string absolutePath)
+        public void ChangeCurrentDirectoryAbsolute(string absolutePath)
         {
             if (!Directory.Exists(absolutePath))
             {
