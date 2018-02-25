@@ -62,9 +62,10 @@ namespace BashSoft.Models
                 return;
             }
 
-            if (scores.Length > EnrolledCourses.Count)
+            if (scores.Length > Course.NumberOfTasksOnExam)
             {
                 OutputWriter.DisplayException(ExceptionMessages.InvalidNumberOfScores);
+                return;
             }
 
             this.marksByCourseName.Add(courseName, CalculateMarks(scores));
