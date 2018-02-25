@@ -35,7 +35,8 @@ namespace BashSoft
 
             try
             {
-                this.ParseCommand(input, commandName, data);
+                var command = this.ParseCommand(input, commandName, data);
+                command.Execute();
             }
             catch (DirectoryNotFoundException dNotFound)
             {
