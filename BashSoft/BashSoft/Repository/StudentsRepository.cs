@@ -214,7 +214,8 @@
         public ISimpleOrderedBag<ICourse> GetAllCoursesSorted(IComparer<ICourse> cmp)
         {
             SimpleSortedList<ICourse> sortedStudents = new SimpleSortedList<ICourse>(cmp);
-            sortedStudents.AddAll(this.courses.Values);
+            var a = this.courses.Values;
+            sortedStudents.AddAll(a);
 
             return sortedStudents;
         }

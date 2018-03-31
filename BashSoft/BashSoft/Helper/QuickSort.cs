@@ -8,10 +8,10 @@
 
     public static class QuickSort
     {
-        public static void Sort<T>(T[] arr, IComparer<T> comparator) where T : IComparable<T>
+        public static void Sort<T>(T[] arr, int lenght, IComparer<T> comparator) where T : IComparable<T>
         {
-            Shuffle(arr);
-            Sort(arr, 0, arr.Length - 1, comparator);
+            Shuffle(arr, lenght);
+            Sort(arr, 0, lenght - 1, comparator);
         }
 
         private static void Sort<T>(T[] arr, int lo, int hi, IComparer<T> comparator) where T : IComparable<T>
@@ -78,15 +78,15 @@
             return comparator.Compare(current, other) < 0;
         }
 
-        private static void Shuffle<T>(T[] source)
+        private static void Shuffle<T>(T[] source, int count)
         {
             Random rnd = new Random();
 
-            for (int i = 0; i < source.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 // Exchange array[i] with random element in array[i … n-1]
 
-                int r = i + rnd.Next(0, source.Length - i);
+                int r = i + rnd.Next(0, count - i);
 
                 T temp = source[i];
                 source[i] = source[r];

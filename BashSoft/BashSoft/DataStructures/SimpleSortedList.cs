@@ -70,7 +70,7 @@ namespace BashSoft.DataStructures
                 this._size++;
             }
 
-            QuickSort.Sort(this.innerCollection, this.comparison);
+            QuickSort.Sort(this.innerCollection, this.Size, this.comparison);
         }
 
         public string JoinWith(string joiner)
