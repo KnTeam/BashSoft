@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BashSoft.Exceptions;
 using BashSoft.Contracts;
+using BashSoft.Contracts.Models;
 
 namespace BashSoft.Models
 {

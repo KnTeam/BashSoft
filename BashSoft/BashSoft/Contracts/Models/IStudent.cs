@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BashSoft.Contracts
+namespace BashSoft.Contracts.Models
 {
     public interface IStudent
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BashSoft.Exceptions;
 using BashSoft.Contracts;
+using BashSoft.Contracts.Models;
 
 namespace BashSoft.Models
 {
