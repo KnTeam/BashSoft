@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BashSoft.Contracts.Models
 {
-    public interface ICourse
+    public interface ICourse : IComparable<ICourse>
     {
         string Name { get; }
 

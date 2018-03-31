@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BashSoft.Contracts.Models
 {
-    public interface IStudent
+    public interface IStudent : IComparable<IStudent>
     {
         string UserName { get; }
 
