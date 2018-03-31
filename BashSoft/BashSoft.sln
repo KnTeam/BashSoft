@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BashSoft", "BashSoft\BashSoft.csproj", "{8B1DDC7C-E81A-41EE-A6F9-BD275C5078E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BashSoftTesting", "BashSoftTesting\BashSoftTesting.csproj", "{307B0BBA-D152-45C7-B69C-BAEFE98C8A14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8B1DDC7C-E81A-41EE-A6F9-BD275C5078E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1DDC7C-E81A-41EE-A6F9-BD275C5078E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1DDC7C-E81A-41EE-A6F9-BD275C5078E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{307B0BBA-D152-45C7-B69C-BAEFE98C8A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307B0BBA-D152-45C7-B69C-BAEFE98C8A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307B0BBA-D152-45C7-B69C-BAEFE98C8A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307B0BBA-D152-45C7-B69C-BAEFE98C8A14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
