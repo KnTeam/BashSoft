@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace BashSoft.DataStructures
 {
@@ -45,27 +46,76 @@ namespace BashSoft.DataStructures
 
         public void Add(T element)
         {
-            throw new NotImplementedException();
+            if (this.innerCollection.Length == this.Size)
+            {
+                this.Resize();
+            }
+
+            this.innerCollection[this._size] = element;
+            this._size++;
+            Array.Sort(this.innerCollection, 0, this._size, this.comparison);
         }
 
         public void AddAll(ICollection<T> collection)
         {
-            throw new NotImplementedException();
+            if (this.Size + collection.Count >= this.innerCollection.Length)
+            {
+                this.MultiResize(collection);
+            }
+
+            foreach (var element in collection)
+            {
+                this.innerCollection[this._size] = element;
+                this._size++;
+            }
+
+            Array.Sort(this.innerCollection, 0, this._size, this.comparison);
         }
 
         public string JoinWith(string joiner)
         {
-            throw new NotImplementedException();
+            StringBuilder builder = new StringBuilder();
+            foreach (var element in this)
+            {
+                builder.Append(element);
+                builder.Append(joiner);
+            }
+
+            builder.Remove(builder.Length - 1, 1);
+            return builder.ToString();
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < this.Size; i++)
+            {
+                yield return this.innerCollection[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
+        }
+
+        private void Resize()
+        {
+            T[] newCollection = new T[this.Size * 2];
+            Array.Copy(innerCollection, newCollection, this.Size);
+            innerCollection = newCollection;
+        }
+
+        private void MultiResize(ICollection<T> collection)
+        {
+            int newSize = this.innerCollection.Length * 2;
+            while (this._size + collection.Count >= newSize)
+            {
+                newSize *= 2;
+            }
+
+            T[] newCollection = new T[newSize];
+            Array.Copy(innerCollection, newCollection, this._size);
+            innerCollection = newCollection;
         }
     }
 }
