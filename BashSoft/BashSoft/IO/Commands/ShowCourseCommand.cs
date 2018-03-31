@@ -16,13 +16,13 @@
             if (this.Data.Length == 2)
             {
                 string courseName = this.Data[1];
-                this.Repository.GetAllStudentsFromCourse(courseName);
+                this.Repository.GetStudentsByCourse(courseName);
             }
             else if (this.Data.Length == 3)
             {
                 string courseName = this.Data[1];
                 string userName = this.Data[2];
-                this.Repository.GetStudentScoresFromCourse(courseName, userName);
+                this.Repository.GetStudentMarkInCourse(courseName, userName);
             }
             else
             {

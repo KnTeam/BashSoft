@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using BashSoft.Contracts.Repositories;
 
-    public class RepositoryFilter
+    public class RepositoryFilter : IDataFilter
     {
         /// <summary>
         /// Filter students from a given course by given criteria

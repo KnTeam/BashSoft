@@ -1,13 +1,14 @@
-﻿using BashSoft.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
-    public class StudentsRepository
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using BashSoft.Contracts.Repositories;
+    using BashSoft.Models;
+
+    public class StudentsRepository : IDatabase
     {
         //Dictionary<Course name, Dictionary<Username, Grades>>
         private Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
@@ -152,7 +153,7 @@ namespace BashSoft
             return false;
         }
 
-        public void GetStudentScoresFromCourse(string courseName, string username)
+        public void GetStudentMarkInCourse(string courseName, string username)
         {
             if (IsQueryForStudentPossible(courseName, username))
             {
@@ -160,7 +161,7 @@ namespace BashSoft
             }
         }
 
-        public void GetAllStudentsFromCourse(string courseName)
+        public void GetStudentsByCourse(string courseName)
         {
             if (IsQueryForCoursePossible(courseName))
             {
@@ -168,7 +169,7 @@ namespace BashSoft
 
                 foreach (var studentMarkEntry in this.courses[courseName].StudentsByName)
                 {
-                    this.GetStudentScoresFromCourse(courseName, studentMarkEntry.Key);
+                    this.GetStudentMarkInCourse(courseName, studentMarkEntry.Key);
                 }
             }
         }
