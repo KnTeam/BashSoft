@@ -5,15 +5,18 @@
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using BashSoft.Contracts;
+    using BashSoft.Contracts.Models;
     using BashSoft.Contracts.Repositories;
     using BashSoft.Models;
+    using BashSoft.DataStructures;
 
     public class StudentsRepository : IDatabase
     {
         //Dictionary<Course name, Dictionary<Username, Grades>>
         private Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
-        private Dictionary<string, SoftUniCourse> courses;
-        private Dictionary<string, SoftUniStudent> students;
+        private Dictionary<string, ICourse> courses;
+        private Dictionary<string, IStudent> students;
 
         private bool isDataInitialized;
         private RepositoryFilter filter;
@@ -45,8 +48,8 @@
             }
 
             OutputWriter.WriteMessageOnNewLine("Reading data...");
-            students = new Dictionary<string, SoftUniStudent>();
-            courses = new Dictionary<string, SoftUniCourse>();
+            students = new Dictionary<string, IStudent>();
+            courses = new Dictionary<string, ICourse>();
 
             this.ReadData(fileName);
         }
@@ -95,8 +98,8 @@
                                 this.courses.Add(courseName, new SoftUniCourse(courseName));
                             }
 
-                            SoftUniCourse course = this.courses[courseName];
-                            SoftUniStudent student = this.students[userName];
+                            ICourse course = this.courses[courseName];
+                            IStudent student = this.students[userName];
 
                             student.EnrollInCourse(course);
                             student.SetMarkOnCourse(courseName, scores);
@@ -206,6 +209,22 @@
                 
                 this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
+        }
+
+        public ISimpleOrderedBag<ICourse> GetAllCoursesSorted(IComparer<ICourse> cmp)
+        {
+            SimpleSortedList<ICourse> sortedStudents = new SimpleSortedList<ICourse>(cmp);
+            sortedStudents.AddAll(this.courses.Values);
+
+            return sortedStudents;
+        }
+
+        public ISimpleOrderedBag<IStudent> GetAllStudentsSorted(IComparer<IStudent> cmp)
+        {
+            SimpleSortedList<IStudent> sortedStudents = new SimpleSortedList<IStudent>(cmp);
+            sortedStudents.AddAll(this.students.Values);
+
+            return sortedStudents;
         }
     }
 }
