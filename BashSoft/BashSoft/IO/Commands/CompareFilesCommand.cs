@@ -2,8 +2,9 @@
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-    public class CompareFilesCommand : Command
+    public class CompareFilesCommand : Command, IExecutable
     {
         public CompareFilesCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)

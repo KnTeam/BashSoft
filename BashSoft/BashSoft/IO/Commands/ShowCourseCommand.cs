@@ -2,8 +2,9 @@
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-    public class ShowCourseCommand : Command
+    public class ShowCourseCommand : Command, IExecutable
     {
         public ShowCourseCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)

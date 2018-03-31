@@ -4,8 +4,9 @@ namespace BashSoft.IO.Commands
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-    public class TraverseFoldersCommand : Command
+    public class TraverseFoldersCommand : Command, IExecutable
     {
         public TraverseFoldersCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)

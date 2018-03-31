@@ -1,10 +1,11 @@
 ﻿using System;
 using SimpleJudge;
 using BashSoft.Exceptions;
+using BashSoft.Contracts;
 
 namespace BashSoft.IO.Commands
 {
-    public class PrintFilteredStudentsCommand : Command
+    public class PrintFilteredStudentsCommand : Command, IExecutable
     {
         public PrintFilteredStudentsCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
         {

@@ -2,8 +2,9 @@
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-    public class ChangeAbsolutePathCommand : Command
+    public class ChangeAbsolutePathCommand : Command, IExecutable
     {
         public ChangeAbsolutePathCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)
