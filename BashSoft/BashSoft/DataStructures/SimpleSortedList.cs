@@ -1,4 +1,6 @@
-﻿namespace BashSoft.DataStructures
+﻿using System.Runtime.CompilerServices;
+
+namespace BashSoft.DataStructures
 {
     using System;
     using System.Collections;
@@ -10,6 +12,7 @@
         private T[] innerCollection;
         private int _size;
         private IComparer<T> comparison;
+        private const int DefaultCapacity = 4;
 
         public SimpleSortedList(IComparer<T> comparison, int capacity)
         {
@@ -22,15 +25,23 @@
             this.innerCollection = new T[capacity];
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public SimpleSortedList(int capacity)
+           : this(Comparer<T>.Create((x, y) => x.CompareTo(y)), capacity)
         {
-            throw new NotImplementedException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public SimpleSortedList(IComparer<T> comparison)
+            : this(comparison, DefaultCapacity)
         {
-            return GetEnumerator();
         }
+
+
+        public SimpleSortedList()
+            : this(Comparer<T>.Create((x, y) => x.CompareTo(y)), DefaultCapacity)
+        {
+        }
+
+        public int Size => this._size;
 
         public void Add(T element)
         {
@@ -42,11 +53,19 @@
             throw new NotImplementedException();
         }
 
-        public int Size => this._size;
-
         public string JoinWith(string joiner)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
