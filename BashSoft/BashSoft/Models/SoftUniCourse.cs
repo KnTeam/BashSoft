@@ -4,18 +4,18 @@ using BashSoft.Exceptions;
 
 namespace BashSoft.Models
 {
-    public class Course
+    public class SoftUniCourse
     {
         public const int NumberOfTasksOnExam = 5;
         public const int MaxScoreOnExamTask = 100;
 
         private string _name;
-        private Dictionary<string, Student> studentsByName;
+        private Dictionary<string, SoftUniStudent> studentsByName;
 
-        public Course(string name)
+        public SoftUniCourse(string name)
         {
             this.Name = name;
-            this.studentsByName = new Dictionary<string, Student>();
+            this.studentsByName = new Dictionary<string, SoftUniStudent>();
         }
 
         public string Name
@@ -32,13 +32,13 @@ namespace BashSoft.Models
             }
         }
 
-        public IReadOnlyDictionary<string, Student> StudentsByName => studentsByName;
+        public IReadOnlyDictionary<string, SoftUniStudent> StudentsByName => studentsByName;
 
         /// <summary>
         /// Enrolling the current student in a certain course
         /// </summary>
         /// <param name="student">Given student</param>
-        public void EnrollStudent(Student student)
+        public void EnrollStudent(SoftUniStudent student)
         {
             if (this.StudentsByName.ContainsKey(student.UserName))
             {

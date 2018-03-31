@@ -11,8 +11,8 @@ namespace BashSoft
     {
         //Dictionary<Course name, Dictionary<Username, Grades>>
         private Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
-        private Dictionary<string, Course> courses;
-        private Dictionary<string, Student> students;
+        private Dictionary<string, SoftUniCourse> courses;
+        private Dictionary<string, SoftUniStudent> students;
 
         private bool isDataInitialized;
         private RepositoryFilter filter;
@@ -44,8 +44,8 @@ namespace BashSoft
             }
 
             OutputWriter.WriteMessageOnNewLine("Reading data...");
-            students = new Dictionary<string, Student>();
-            courses = new Dictionary<string, Course>();
+            students = new Dictionary<string, SoftUniStudent>();
+            courses = new Dictionary<string, SoftUniCourse>();
 
             this.ReadData(fileName);
         }
@@ -79,7 +79,7 @@ namespace BashSoft
                             {
                                 OutputWriter.DisplayException(ExceptionMessages.InvalidScore);
                             }
-                            if(scores.Length > Course.NumberOfTasksOnExam)
+                            if(scores.Length > SoftUniCourse.NumberOfTasksOnExam)
                             {
                                 OutputWriter.DisplayException(ExceptionMessages.InvalidNumberOfScores);
                                 continue;
@@ -87,15 +87,15 @@ namespace BashSoft
 
                             if (!this.students.ContainsKey(userName))
                             {
-                                this.students.Add(userName, new Student(userName));
+                                this.students.Add(userName, new SoftUniStudent(userName));
                             }
                             if (!this.courses.ContainsKey(courseName))
                             {
-                                this.courses.Add(courseName, new Course(courseName));
+                                this.courses.Add(courseName, new SoftUniCourse(courseName));
                             }
 
-                            Course course = this.courses[courseName];
-                            Student student = this.students[userName];
+                            SoftUniCourse course = this.courses[courseName];
+                            SoftUniStudent student = this.students[userName];
 
                             student.EnrollInCourse(course);
                             student.SetMarkOnCourse(courseName, scores);
