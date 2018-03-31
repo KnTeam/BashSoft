@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using BashSoft.Exceptions;
+using BashSoft.Contracts;
 
 namespace BashSoft.Models
 {
-    public class SoftUniStudent
+    public class SoftUniStudent : IStudent
     {
         private string userName;
-        private Dictionary<string, SoftUniCourse> enrolledCourses;
+        private Dictionary<string, ICourse> enrolledCourses;
         private Dictionary<string, double> marksByCourseName;
 
         public SoftUniStudent(string userName)
         {
             this.UserName = userName;
-            this.enrolledCourses = new Dictionary<string, SoftUniCourse>();
+            this.enrolledCourses = new Dictionary<string, ICourse>();
             this.marksByCourseName = new Dictionary<string, double>();
         }
 
@@ -32,7 +33,7 @@ namespace BashSoft.Models
             }
         }
 
-        public IReadOnlyDictionary<string, SoftUniCourse> EnrolledCourses => enrolledCourses;
+        public IReadOnlyDictionary<string, ICourse> EnrolledCourses => enrolledCourses;
 
         public IReadOnlyDictionary<string, double> MarksByCourseName => marksByCourseName;
 
@@ -40,7 +41,7 @@ namespace BashSoft.Models
         /// Used for enrolling the current student in a certain course
         /// </summary>
         /// <param name="course">Course to be enrolled in</param>
-        public void EnrollInCourse(SoftUniCourse course)
+        public void EnrollInCourse(ICourse course)
         {
             if (this.EnrolledCourses.ContainsKey(course.Name))
             {
