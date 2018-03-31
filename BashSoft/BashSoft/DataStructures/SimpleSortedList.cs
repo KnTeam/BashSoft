@@ -7,6 +7,7 @@ namespace BashSoft.DataStructures
     using System.Collections;
     using System.Collections.Generic;
     using BashSoft.Contracts;
+    using BashSoft.Helper;
 
     public class SimpleSortedList<T> : ISimpleOrderedBag<T> where T : IComparable<T>
     {
@@ -69,7 +70,7 @@ namespace BashSoft.DataStructures
                 this._size++;
             }
 
-            Array.Sort(this.innerCollection, 0, this._size, this.comparison);
+            QuickSort.Sort(this.innerCollection, this.comparison);
         }
 
         public string JoinWith(string joiner)
