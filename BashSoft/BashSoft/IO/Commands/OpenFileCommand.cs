@@ -1,10 +1,11 @@
 ﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Contracts;
     using BashSoft.Exceptions;
     using SimpleJudge;
     using System.Diagnostics;
 
-    public class OpenFileCommand : Command
+    public class OpenFileCommand : Command, IExecutable
     {
         public OpenFileCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
         {

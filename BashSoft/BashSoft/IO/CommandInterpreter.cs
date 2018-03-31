@@ -7,11 +7,13 @@ namespace BashSoft
     using SimpleJudge;
     using BashSoft.IO.Commands;
     using BashSoft.Exceptions;
+    using BashSoft.Contracts;
+    using BashSoft.Contracts.IO;
 
     /// <summary>
     /// Class respossible for interpreting user commands
     /// </summary>
-    public class CommandInterpreter
+    public class CommandInterpreter : IInterpreter
     {
         private Tester judge;
         private StudentsRepository repository;
@@ -28,14 +30,14 @@ namespace BashSoft
         /// Interprets given input and executes the coresponding command. If the command or arguments are invalid, an user friendly exception message is given
         /// </summary>
         /// <param name="input">User input string with command and arguments (if any)</param>
-        public void InterpredCommand(string input)
+        public void InterpretCommand(string input)
         {
             string[] data = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string commandName = data[0];
 
             try
             {
-                var command = this.ParseCommand(input, commandName, data);
+                IExecutable command = this.ParseCommand(input, commandName, data);
                 command.Execute();
             }
             catch (DirectoryNotFoundException dNotFound)
@@ -56,7 +58,7 @@ namespace BashSoft
             }
         }
 
-        private Command ParseCommand(string input, string commandName, string[] data)
+        private IExecutable ParseCommand(string input, string commandName, string[] data)
         {
             switch (commandName.ToLower())
             {

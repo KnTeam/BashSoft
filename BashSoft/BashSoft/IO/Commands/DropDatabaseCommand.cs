@@ -2,9 +2,9 @@
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-
-    public class DropDatabaseCommand :  Command
+    public class DropDatabaseCommand :  Command, IExecutable
     {
         public DropDatabaseCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)

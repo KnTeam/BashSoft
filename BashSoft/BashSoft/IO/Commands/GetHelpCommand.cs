@@ -1,4 +1,5 @@
-﻿using BashSoft.Exceptions;
+﻿using BashSoft.Contracts;
+using BashSoft.Exceptions;
 using SimpleJudge;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace BashSoft.IO.Commands
 {
-    public class GetHelpCommand : Command
+    public class GetHelpCommand : Command, IExecutable
     {
         public GetHelpCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
         {

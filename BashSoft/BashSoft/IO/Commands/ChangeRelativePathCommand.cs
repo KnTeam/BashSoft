@@ -2,8 +2,9 @@
 {
     using SimpleJudge;
     using Exceptions;
+    using BashSoft.Contracts;
 
-    public class ChangeRelativePathCommand : Command
+    public class ChangeRelativePathCommand : Command, IExecutable
     {
         public ChangeRelativePathCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)

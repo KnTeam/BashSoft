@@ -1,5 +1,6 @@
 ﻿namespace BashSoft
 {
+    using BashSoft.Contracts.IO;
     using System;
 
     /// <summary>
@@ -8,9 +9,9 @@
     public class InputReader
     {
         private const string endCommand = "quit";
-        private CommandInterpreter interpreter;
+        private IInterpreter interpreter;
 
-        public InputReader(CommandInterpreter interpreter)
+        public InputReader(IInterpreter interpreter)
         {
             this.interpreter = interpreter;
         }
@@ -27,7 +28,7 @@
             // TODO: change with do-while ??? avoiding repetitions of code
             while (!input.Equals(endCommand))
             {
-                this.interpreter.InterpredCommand(input);
+                this.interpreter.InterpretCommand(input);
                 OutputWriter.WriteMessage($"{SessionData.currentPath}> ");
                 input = Console.ReadLine();
                 input = input.Trim();

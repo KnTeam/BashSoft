@@ -1,10 +1,11 @@
-﻿using BashSoft.Exceptions;
+﻿using BashSoft.Contracts;
+using BashSoft.Exceptions;
 using SimpleJudge;
 using System;
 
 namespace BashSoft.IO.Commands
 {
-    public abstract class Command
+    public abstract class Command : IExecutable
     {
         private Tester judge;
         private StudentsRepository repository;
