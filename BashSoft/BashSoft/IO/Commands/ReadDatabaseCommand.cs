@@ -3,10 +3,11 @@
     using SimpleJudge;
     using Exceptions;
     using BashSoft.Contracts;
+    using BashSoft.Contracts.IO;
 
     public class ReadDatabaseCommand : Command, IExecutable
     {
-        public ReadDatabaseCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
+        public ReadDatabaseCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
             : base(input, data, judge, repository, inputOutputManager)
         { }
 

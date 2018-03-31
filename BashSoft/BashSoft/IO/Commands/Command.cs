@@ -1,4 +1,5 @@
 ﻿using BashSoft.Contracts;
+using BashSoft.Contracts.IO;
 using BashSoft.Exceptions;
 using SimpleJudge;
 using System;
@@ -9,12 +10,12 @@ namespace BashSoft.IO.Commands
     {
         private Tester judge;
         private StudentsRepository repository;
-        private IOManager inputOutputManager;
+        private IDirectoryManager inputOutputManager;
 
         private string input;
         private string[] data;
 
-        public Command(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager)
+        public Command(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
         {
             this.Input = input;
             this.Data = data;
@@ -31,7 +32,7 @@ namespace BashSoft.IO.Commands
         {
             get { return this.repository; }
         }
-        protected IOManager InputOutputManager
+        protected IDirectoryManager InputOutputManager
         {
             get { return this.inputOutputManager; }
         }

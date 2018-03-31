@@ -1,4 +1,5 @@
 ﻿using BashSoft.Contracts;
+using BashSoft.Contracts.IO;
 using BashSoft.Exceptions;
 using SimpleJudge;
 using System;
@@ -7,7 +8,7 @@ namespace BashSoft.IO.Commands
 {
     public class MakeDirectoryCommand : Command, IExecutable
     {
-        public MakeDirectoryCommand(string input, string[] data, Tester judge, StudentsRepository repository, IOManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
+        public MakeDirectoryCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
         {
 
         }

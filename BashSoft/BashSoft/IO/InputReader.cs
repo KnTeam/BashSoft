@@ -6,7 +6,7 @@
     /// <summary>
     /// An interpreter that calls the functionalities. 
     /// </summary>
-    public class InputReader
+    public class InputReader : IReader
     {
         private const string endCommand = "quit";
         private IInterpreter interpreter;

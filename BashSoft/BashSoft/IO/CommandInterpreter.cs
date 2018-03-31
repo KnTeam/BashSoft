@@ -17,9 +17,9 @@ namespace BashSoft
     {
         private Tester judge;
         private StudentsRepository repository;
-        private IOManager inputOutputManager;
+        private IDirectoryManager inputOutputManager;
 
-        public CommandInterpreter(Tester judge, StudentsRepository repository, IOManager inputOutputManager)
+        public CommandInterpreter(Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
         {
             this.judge = judge;
             this.repository = repository;

@@ -3,13 +3,14 @@ using BashSoft.Exceptions;
 
 namespace BashSoft
 {
+    using BashSoft.Contracts.IO;
     using System.Collections.Generic;
     using System.IO;
 
     /// <summary>
     ///     Functionality for traversing the folders and other behaviors.
     /// </summary>
-    public class IOManager
+    public class IOManager : IDirectoryManager
     {
         /// <summary>
         ///     Traverse the folder of the project using a queue with BFS.

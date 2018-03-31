@@ -20,7 +20,7 @@ namespace BashSoft
             var repo = new StudentsRepository(new RepositorySorter(), new RepositoryFilter());
 
             IInterpreter currentInterpreter = new CommandInterpreter(tester, repo, ioManager);
-            var reader = new InputReader(currentInterpreter);
+            IReader reader = new InputReader(currentInterpreter);
 
             reader.StartReadingCommands();
         }
