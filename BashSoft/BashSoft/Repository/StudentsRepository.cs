@@ -5,8 +5,11 @@
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using BashSoft.Contracts;
+    using BashSoft.Contracts.Models;
     using BashSoft.Contracts.Repositories;
     using BashSoft.Models;
+    using BashSoft.DataStructures;
 
     public class StudentsRepository : IDatabase
     {
@@ -206,6 +209,16 @@
                 
                 this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
+        }
+
+        public ISimpleOrderedBag<ICourse> GetAllCoursesSorted(IComparer<ICourse> cmp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ISimpleOrderedBag<IStudent> GetAllStudentsSorted(IComparer<IStudent> cmp)
+        {
+            throw new NotImplementedException();
         }
     }
 }
