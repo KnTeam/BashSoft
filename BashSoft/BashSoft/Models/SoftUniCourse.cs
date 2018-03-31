@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BashSoft.Exceptions;
 using BashSoft.Contracts;
+using BashSoft.Contracts.Models;
 
 namespace BashSoft.Models
 {
@@ -34,6 +35,7 @@ namespace BashSoft.Models
         }
 
         public IReadOnlyDictionary<string, IStudent> StudentsByName => studentsByName;
+        
 
         /// <summary>
         /// Enrolling the current student in a certain course
@@ -48,5 +50,9 @@ namespace BashSoft.Models
 
             this.studentsByName.Add(student.UserName, student);
         }
+
+        public int CompareTo(ICourse other) => this.Name.CompareTo(other.Name);
+
+        public override string ToString() => this.Name;
     }
 }

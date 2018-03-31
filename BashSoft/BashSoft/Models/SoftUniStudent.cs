@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BashSoft.Exceptions;
 using BashSoft.Contracts;
+using BashSoft.Contracts.Models;
 
 namespace BashSoft.Models
 {
@@ -82,5 +83,9 @@ namespace BashSoft.Models
             double mark = percentageOfSolvedExams * 4 + 2;
             return mark;
         }
+
+        public int CompareTo(IStudent other) => this.UserName.CompareTo(other.UserName);
+
+        public override string ToString() => this.UserName;
     }
 }
