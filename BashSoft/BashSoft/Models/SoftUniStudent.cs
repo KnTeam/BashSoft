@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BashSoft.Exceptions;
-using BashSoft.Contracts;
-using BashSoft.Contracts.Models;
-
-namespace BashSoft.Models
+﻿namespace BashSoft.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BashSoft.Exceptions;
+    using BashSoft.Contracts.Models;
+
     public class SoftUniStudent : IStudent
     {
         private string userName;

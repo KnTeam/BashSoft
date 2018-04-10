@@ -1,8 +1,7 @@
-﻿using System;
-using BashSoft.Exceptions;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using System;
+    using BashSoft.Exceptions;
     using BashSoft.Contracts.IO;
     using System.Collections.Generic;
     using System.IO;

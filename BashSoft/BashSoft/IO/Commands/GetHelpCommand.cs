@@ -1,16 +1,13 @@
-﻿using BashSoft.Contracts;
-using BashSoft.Contracts.IO;
-using BashSoft.Exceptions;
-using SimpleJudge;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Attributes;
+    using BashSoft.Contracts;
+    using BashSoft.Exceptions;
+
+    [Alias("help")]
     public class GetHelpCommand : Command, IExecutable
     {
-        public GetHelpCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
+        public GetHelpCommand(string input, string[] data) : base(input, data)
         {
 
         }

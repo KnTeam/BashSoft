@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BashSoft.Contracts.IO
+﻿namespace BashSoft.Contracts.IO
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface IDirectoryChanger
     {
         void ChangeCurrentDirectoryRelative(string relativePath);

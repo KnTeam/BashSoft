@@ -1,9 +1,7 @@
-﻿using SimpleJudge;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using SimpleJudge;
     using BashSoft.Contracts.IO;
-    using System;
 
     /// <summary>
     ///     Entry point for the project

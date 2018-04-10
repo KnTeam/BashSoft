@@ -3,12 +3,16 @@
     using SimpleJudge;
     using Exceptions;
     using BashSoft.Contracts;
-    using BashSoft.Contracts.IO;
+    using BashSoft.Attributes;
 
+    [Alias("cmp")]
     public class CompareFilesCommand : Command, IExecutable
     {
-        public CompareFilesCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
-            : base(input, data, judge, repository, inputOutputManager)
+        [Inject]
+        private Tester judge;
+
+        public CompareFilesCommand(string input, string[] data)
+            : base(input, data)
         { }
 
         public override void Execute()
@@ -20,7 +24,7 @@
 
             string firstFilePath = this.Data[1];
             string secondFilePath = this.Data[2];
-            this.Judge.CompareContent(firstFilePath, secondFilePath);
+            this.judge.CompareContent(firstFilePath, secondFilePath);
         }
     }
 }

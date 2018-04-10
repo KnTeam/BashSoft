@@ -1,14 +1,15 @@
-﻿using System.IO;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
+    using System.IO;
     using System;
-    using System.Diagnostics;
     using SimpleJudge;
     using BashSoft.IO.Commands;
-    using BashSoft.Exceptions;
     using BashSoft.Contracts;
     using BashSoft.Contracts.IO;
+    using System.Reflection;
+    using System.Linq;
+    using BashSoft.Attributes;
+    using System.Globalization;
 
     /// <summary>
     /// Class respossible for interpreting user commands
@@ -37,7 +38,7 @@ namespace BashSoft
 
             try
             {
-                IExecutable command = this.ParseCommand(input, commandName, data);
+                IExecutable command = this.ParseCommand(input, commandName.ToLower(), data);
                 command.Execute();
             }
             catch (DirectoryNotFoundException dNotFound)
@@ -60,37 +61,38 @@ namespace BashSoft
 
         private IExecutable ParseCommand(string input, string commandName, string[] data)
         {
-            switch (commandName.ToLower())
+            object[] constructorParameters = new object[] { input, data };
+
+            Type commandType =
+                Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .First(type => type.GetCustomAttributes(typeof(AliasAttribute))
+                .Where(att => att.Equals(commandName))
+                .ToArray().Length > 0);
+
+            Type interpreterType = typeof(CommandInterpreter);
+
+            IExecutable command = (Command)Activator.CreateInstance(commandType, constructorParameters);
+
+            FieldInfo[] commandFields = commandType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+
+            FieldInfo[] interpreterFields = interpreterType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+
+            foreach (var fieldOfCommand in commandFields)
             {
-                case "open":
-                    return new OpenFileCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "mkdir":
-                    return new MakeDirectoryCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "ls":
-                    return new TraverseFoldersCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "display":
-                    return new DisplayCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "cmp":
-                    return new CompareFilesCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "cdrel":
-                    return new ChangeRelativePathCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "cdabs":
-                    return new ChangeAbsolutePathCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "readdb":
-                    return new ReadDatabaseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "dropdb":
-                    return new DropDatabaseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "help":
-                    return new GetHelpCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "show":
-                    return new ShowCourseCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "filter":
-                    return new PrintFilteredStudentsCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                case "order":
-                    return new PrintOrderedStudentsCommand(input, data, this.judge, this.repository, this.inputOutputManager);
-                default:
-                    throw new InvalidCommandException(commandName);
+                Attribute injectAttribute = fieldOfCommand.GetCustomAttribute(typeof(InjectAttribute));
+
+                if(injectAttribute != null)
+                {
+                    if(interpreterFields.Any(x => x.FieldType == fieldOfCommand.FieldType))
+                    {
+                        fieldOfCommand.SetValue(command,
+                            interpreterFields.First(x => x.FieldType == fieldOfCommand.FieldType).GetValue(this));
+                    }
+                }
             }
+
+            return command;
         }
     }
 }

@@ -1,40 +1,18 @@
-﻿using BashSoft.Contracts;
-using BashSoft.Contracts.IO;
-using BashSoft.Exceptions;
-using SimpleJudge;
-using System;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Contracts;
+    using BashSoft.Exceptions;
+    using System;
+
     public abstract class Command : IExecutable
     {
-        private Tester judge;
-        private StudentsRepository repository;
-        private IDirectoryManager inputOutputManager;
-
         private string input;
         private string[] data;
 
-        public Command(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
+        public Command(string input, string[] data)
         {
             this.Input = input;
             this.Data = data;
-            this.judge = judge;
-            this.repository = repository;
-            this.inputOutputManager = inputOutputManager;
-        }
-
-        protected Tester Judge
-        {
-            get { return this.judge; }
-        }
-        protected StudentsRepository Repository
-        {
-            get { return this.repository; }
-        }
-        protected IDirectoryManager InputOutputManager
-        {
-            get { return this.inputOutputManager; }
         }
 
         protected string[] Data

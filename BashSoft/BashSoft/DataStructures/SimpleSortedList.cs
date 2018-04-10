@@ -1,8 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace BashSoft.DataStructures
+﻿namespace BashSoft.DataStructures
 {
+    using System.Text;
     using System;
     using System.Collections;
     using System.Collections.Generic;

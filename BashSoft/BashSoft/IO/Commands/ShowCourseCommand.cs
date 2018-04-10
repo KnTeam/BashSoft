@@ -1,14 +1,17 @@
 ﻿namespace BashSoft.IO.Commands
 {
-    using SimpleJudge;
     using Exceptions;
     using BashSoft.Contracts;
-    using BashSoft.Contracts.IO;
+    using BashSoft.Attributes;
 
+    [Alias("show")]
     public class ShowCourseCommand : Command, IExecutable
     {
-        public ShowCourseCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager)
-            : base(input, data, judge, repository, inputOutputManager)
+        [Inject]
+        private StudentsRepository repository;
+
+        public ShowCourseCommand(string input, string[] data)
+            : base(input, data)
         {
         }
 
@@ -17,13 +20,13 @@
             if (this.Data.Length == 2)
             {
                 string courseName = this.Data[1];
-                this.Repository.GetStudentsByCourse(courseName);
+                this.repository.GetStudentsByCourse(courseName);
             }
             else if (this.Data.Length == 3)
             {
                 string courseName = this.Data[1];
                 string userName = this.Data[2];
-                this.Repository.GetStudentMarkInCourse(courseName, userName);
+                this.repository.GetStudentMarkInCourse(courseName, userName);
             }
             else
             {

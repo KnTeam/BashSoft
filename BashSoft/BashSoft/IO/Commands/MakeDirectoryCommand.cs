@@ -1,14 +1,17 @@
-﻿using BashSoft.Contracts;
-using BashSoft.Contracts.IO;
-using BashSoft.Exceptions;
-using SimpleJudge;
-using System;
-
-namespace BashSoft.IO.Commands
+﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Attributes;
+    using BashSoft.Contracts;
+    using BashSoft.Contracts.IO;
+    using BashSoft.Exceptions;
+
+    [Alias("mkdir")]
     public class MakeDirectoryCommand : Command, IExecutable
     {
-        public MakeDirectoryCommand(string input, string[] data, Tester judge, StudentsRepository repository, IDirectoryManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager)
+        [Inject]
+        private IDirectoryManager inputOutputManager;
+
+        public MakeDirectoryCommand(string input, string[] data) : base(input, data)
         {
 
         }
@@ -20,7 +23,7 @@ namespace BashSoft.IO.Commands
                 throw new InvalidCommandException(this.Input);
             }
             string folderName = this.Data[1];
-            this.InputOutputManager.CreateDirectoryInCurrentFolder(folderName);
+            this.inputOutputManager.CreateDirectoryInCurrentFolder(folderName);
         }
     }
 }

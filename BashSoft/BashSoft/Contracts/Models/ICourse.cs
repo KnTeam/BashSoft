@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BashSoft.Contracts.Models
+﻿namespace BashSoft.Contracts.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface ICourse : IComparable<ICourse>
     {
         string Name { get; }
