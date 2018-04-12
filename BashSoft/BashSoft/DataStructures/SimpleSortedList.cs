@@ -88,6 +88,11 @@
         /// <returns>Returns a string representing the collection separated with the given symbol.</returns>
         public string JoinWith(string joiner)
         {
+            if (this.Size == 0)
+            {
+                return string.Empty;
+            }
+
             StringBuilder builder = new StringBuilder();
             foreach (var element in this)
             {
@@ -95,7 +100,7 @@
                 builder.Append(joiner);
             }
 
-            builder.Remove(builder.Length - 1, 1);
+            builder.Remove(builder.Length - joiner.Length, joiner.Length);
             return builder.ToString();
         }
 
