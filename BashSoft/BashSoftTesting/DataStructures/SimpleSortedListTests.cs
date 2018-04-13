@@ -3,7 +3,8 @@
     using BashSoft.DataStructures;
     using NUnit.Framework;
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestFixture]
     public class SimpleSortedListTests
@@ -22,7 +23,104 @@
         public void Constructor_WithoutItems_CapacityIsCorrect(int capacity)
         {
             var list = new SimpleSortedList<int>(capacity);
+
             Assert.That(list.Capacity, Is.EqualTo(capacity));
+        }
+
+        [Test]
+        public void Constructor_With_Comparator_Ascending_ShouldWorkCorrectly()
+        {
+            IComparer<int> comparer = Comparer<int>.Create((x, y) => x.CompareTo(y));
+
+            int[] intCollection = new int[] { 8, 6, 3, 7, 5, 1, 4, 2 };
+
+            SimpleSortedList<int> simpleSortedList = new SimpleSortedList<int>(comparer);
+
+            simpleSortedList.AddAll(intCollection);
+
+            Array.Sort<int>(intCollection);
+
+            int index = 0;
+
+            foreach (var element in simpleSortedList)
+            {
+                Assert.That(element, Is.EqualTo(intCollection[index]));
+                index++;
+            }
+        }
+
+        [Test]
+        public void Constructor_With_Comparator_Descending_ShouldWorkCorrectly()
+        {
+            IComparer<int> comparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+
+            int[] intCollection = new int[] { 8, 6, 3, 7, 5, 1, 4, 2 };
+
+            SimpleSortedList<int> simpleSortedList = new SimpleSortedList<int>(comparer);
+
+            simpleSortedList.AddAll(intCollection);
+
+            Array.Sort<int>(intCollection);
+
+            intCollection = intCollection.Reverse().ToArray();
+
+            int index = 0;
+
+            foreach (var element in simpleSortedList)
+            {
+                Assert.That(element, Is.EqualTo(intCollection[index]));
+                index++;
+            }
+        }
+
+        [Test]
+        public void Constructor_With_Comparator_Ascending_And_Capacity_ShouldWorkCorrectly()
+        {
+            IComparer<int> comparer = Comparer<int>.Create((x, y) => x.CompareTo(y));
+
+            int[] intCollection = new int[] { 8, 6, 3, 7, 5, 1, 4, 2 };
+
+            SimpleSortedList<int> simpleSortedList = new SimpleSortedList<int>(comparer, intCollection.Length);
+
+            Assert.That(simpleSortedList.Capacity == intCollection.Length);
+
+            simpleSortedList.AddAll(intCollection);
+
+            Array.Sort<int>(intCollection);
+
+            int index = 0;
+
+            foreach (var element in simpleSortedList)
+            {
+                Assert.That(element, Is.EqualTo(intCollection[index]));
+                index++;
+            }
+        }
+
+        [Test]
+        public void Constructor_With_Comparator_Descending_And_Capacity_ShouldWorkCorrectly()
+        {
+            IComparer<int> comparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+
+            int[] intCollection = new int[] { 8, 6, 3, 7, 5, 1, 4, 2 };
+
+            SimpleSortedList<int> simpleSortedList = new SimpleSortedList<int>(comparer, intCollection.Length);
+
+            Assert.That(simpleSortedList.Capacity == intCollection.Length);
+
+            simpleSortedList.AddAll(intCollection);
+
+            Array.Sort<int>(intCollection);
+
+            intCollection = intCollection.Reverse().ToArray();
+
+            int index = 0;
+            
+            foreach (var element in simpleSortedList)
+            {
+                Assert.That(element, Is.EqualTo(intCollection[index]));
+                index++;
+            }
         }
 
         [Test]
@@ -31,6 +129,7 @@
             int[] intCollection = new int[] { 1, 2, 3, 4, 5, 8, 7, 6 };
             var list = new SimpleSortedList<int>();
             list.AddAll(intCollection);
+
             Assert.That(list.Size, Is.EqualTo(intCollection.Length));
         }
 
@@ -38,6 +137,7 @@
         public void Size_WithoutItems_IsCorrect()
         {
             var list = new SimpleSortedList<int>();
+
             Assert.That(list.Size, Is.EqualTo(0));
         }
 
